@@ -18,6 +18,7 @@ class CreatePasswordResetCodesTable extends Migration
             $table->string('email')->index();
             $table->string('code');
             $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

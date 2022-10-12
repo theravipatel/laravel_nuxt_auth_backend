@@ -56,7 +56,7 @@ class PasswordResetController extends Controller
 
     public function resetPassword(Request $request) {
         $request->validate([
-            'code' => 'required|string|exists:reset_code_passwords',
+            'code' => 'required|string|exists:password_reset_codes',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -74,7 +74,8 @@ class PasswordResetController extends Controller
         $user = User::firstWhere('email', $passwordReset->email);
 
         // update user password
-        $user->update($request->only('password'));
+        $user->password = bcrypt($request->password);
+        $user->save();
 
         // delete current code 
         $passwordReset->delete();
