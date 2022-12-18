@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PasswordResetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,8 @@ Route::post("logout",[AuthController::class,"logout"]);
 Route::post("generate-code",[PasswordResetController::class,"generateCode"]);
 Route::post("code-check",[PasswordResetController::class,"codeCheck"]);
 Route::post("reset-password",[PasswordResetController::class,"resetPassword"]);
+
+Route::get("category/manage", [CategoryController::class,"index"]);
+Route::get("category/add_edit/{id}", [CategoryController::class,"add_edit"]);
+Route::post("category/save", [CategoryController::class,"save"]);
+Route::get("category/delete/{id}", [CategoryController::class,"delete"]);
